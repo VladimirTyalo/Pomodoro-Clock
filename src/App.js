@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import react from './react.svg';
+import redux from './redux.svg';
+import jest from './jest.svg';
+
+import Main from './Main';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <header className="App-header">
+          <h2 className="header">Pomodoro Clock</h2>
+          <img src={react} className="icon icon-react" alt="react icon" width="50" height="50" title="react"/>
+          <img src={redux} className="icon icon-redux" alt="redux icon" width="50" height="50" title="redux"/>
+          <img src={jest} className="icon icon-jest" alt="jest icon" width="50" height="50" title="jest"/>
+        </header>
+        <Main />
       </div>
     );
   }
