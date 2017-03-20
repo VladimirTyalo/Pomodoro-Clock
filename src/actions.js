@@ -6,7 +6,9 @@ export const type = {
   PAUSE: "PAUSE",
   PLAY: "PLAY",
   CLEAR: "CLEAR",
-  SWITCH_SESSION: "SWITCH_SESSION"
+  SWITCH_SESSION: "SWITCH_SESSION",
+  DECREMENT_SESSION_TIME: "DECREMENT_SESSION_TIME",
+  SET_TIMER_HANDLER: "SET_TIMER_HANDLER"
 };
 
 export const create = {
@@ -17,5 +19,7 @@ export const create = {
   pause: () => ({ type: type.PAUSE }),
   play: () => ({ type: type.PLAY }),
   clear: () => ({ type: type.CLEAR }),
-  switchSession: (session) => ({type: type.SWITCH_SESSION, session})
+  switchSession: (session) => ({type: type.SWITCH_SESSION, session}),
+  decrementSessionTime: () => ({type: type.DECREMENT_SESSION_TIME}),
+  setTimerHandler: (handler) => ({type: type.SET_TIMER_HANDLER, handler})
 };

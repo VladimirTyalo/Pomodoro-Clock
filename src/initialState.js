@@ -1,6 +1,8 @@
 export const  initialState = {
   restTime: 5,
-  workTime: 25,
-  isPausing: false,
+  workTime: 1,
+  isPausing: true,
   session: "work", // "rest"
-  countDown: 25 };
+  countDown: 20,
+  timerHandler: null
+ };

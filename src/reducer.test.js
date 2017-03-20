@@ -85,7 +85,7 @@ describe('#reducer', () => {
   });
 
   it('should reset current session to default and stop playing', () => {
-    const expected = {...state, countDown: state.workTime, isPausing: true};
+    const expected = {...state, countDown: state.workTime * 60, isPausing: true};
     const actual = reducer(state, create.clear());
 
     expect(actual).toEqual(expected);
@@ -93,7 +93,7 @@ describe('#reducer', () => {
 
   it('should toggle sessions on SWITCH_SESSION actions', () => {
      const isWorking = state.session == 'work';
-     const countDown = isWorking? state.restTime : state.workTime;
+     const countDown = isWorking? state.restTime * 60 : state.workTime  * 60;
      const expected = {...state, session: isWorking? "rest": "work", countDown };
      const actual = reducer(state, create.switchSession("rest"));
 
