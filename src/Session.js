@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import reset from './reset.svg';
+import reset from './assets/reset.svg';
 import { create } from './actions';
+
+import * as audio from './audio';
 
 
 class Session extends Component {
   statusMessage() {
     if (this.props.isPausing) return "Pause";
-
     if (this.props.session === 'work') {
       return "Focus on work";
     } else {
@@ -34,13 +35,19 @@ class Session extends Component {
   }
 
   getClassName() {
+    let classList;
     if (this.props.isPausing) {
-      return 'progress progress--pause';
+      classList = 'progress progress--pause';
     } else if (this.props.session === 'work') {
-      return 'progress progress--play';
+      classList = 'progress progress--play';
     } else {
-      return "progress progress--play progress--break";
+      classList = "progress progress--play progress--break";
     }
+    classList = (this.props.countDown < 60)
+      ? `${classList} progress--last-minute`
+      : classList;
+
+    return classList;
   }
 
   circleStyles() {
@@ -60,7 +67,6 @@ class Session extends Component {
 
     function offsetInDeg() {
       const {session, countDown, workTime, restTime} = this.props;
-      console.log(session, countDown, workTime, restTime);
       let angle;
       // find percentage of elapsed time and normalize it to degrees 
       if (session === 'work') {
@@ -72,6 +78,14 @@ class Session extends Component {
       return 360 - angle;
     }
   }
+
+  componentDidUpdate(prevProps, prevState) {
+   if(!prevProps.audioIsPlaying && prevProps.countDown <= 12) {
+     const time = this.props.audioPausedAt.countdown;
+      this.props.playAudio(audio, 'countdown', time);
+    }
+  }
+  
 
   render() {
     return (
@@ -108,6 +122,8 @@ const mapStateToProps = state => ({
   isPausing: state.isPausing,
   workTime: state.workTime,
   restTime: state.restTime,
+  audioIsPlaying: state.audioIsPlaying,
+  audioPausedAt: state.audioPausedAt,
   radius: 360,
 });
 
@@ -133,7 +149,11 @@ const mapDispatchToProps = dispatch => ({
 
   pause: () => Promise.all([
     dispatch(create.pause()),
+    dispatch(create.pauseAudio(audio, 'countdown'))
+  ]),
 
+  playAudio: (audio, name, time) => Promise.all([
+    dispatch(create.playAudio(audio, name, time))
   ])
 });
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import react from './react.svg';
-import redux from './redux.svg';
-import jest from './jest.svg';
+import react from './assets/react.svg';
+import redux from './assets/redux.svg';
+import jest from './assets/jest.svg';
 
 import Main from './Main';
 

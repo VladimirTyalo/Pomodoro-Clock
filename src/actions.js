@@ -8,7 +8,10 @@ export const type = {
   CLEAR: "CLEAR",
   SWITCH_SESSION: "SWITCH_SESSION",
   DECREMENT_SESSION_TIME: "DECREMENT_SESSION_TIME",
-  SET_TIMER_HANDLER: "SET_TIMER_HANDLER"
+  SET_TIMER_HANDLER: "SET_TIMER_HANDLER",
+  PLAY_AUDiO: "PLAY_AUDIO",
+  PAUSE_AUDIO: "PAUSE_AUDIO",
+  STOP_AUDIO: "STOP_AUDIO"
 };
 
 export const create = {
@@ -19,7 +22,10 @@ export const create = {
   pause: () => ({ type: type.PAUSE }),
   play: () => ({ type: type.PLAY }),
   clear: () => ({ type: type.CLEAR }),
-  switchSession: (session) => ({type: type.SWITCH_SESSION, session}),
-  decrementSessionTime: () => ({type: type.DECREMENT_SESSION_TIME}),
-  setTimerHandler: (handler) => ({type: type.SET_TIMER_HANDLER, handler})
+  switchSession: (session) => ({ type: type.SWITCH_SESSION, session }),
+  decrementSessionTime: () => ({ type: type.DECREMENT_SESSION_TIME }),
+  setTimerHandler: (handler) => ({ type: type.SET_TIMER_HANDLER, handler }),
+  playAudio: (audio, name, time) => ({ type: type.PLAY_AUDiO, name, time, audio }),
+  pauseAudio: (audio, name) => ({ type: type.PAUSE_AUDIO, name, audio }),
+  stopAudio: (audio, name) => ({ type: type.STOP_AUDIO, name, audio})
 };

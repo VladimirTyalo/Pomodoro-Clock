@@ -12,18 +12,19 @@ const enhancer = compose(
         : noop => noop
 );
 
-
 const store = createStore(reducer, initialState, enhancer);
 
 // to switch between work and rest sessions automatically
 // we need current state and a dispatch method in one place
 store.subscribe(() => {
     const state = store.getState();
+
     if (state.countDown <= 0) {
         store.dispatch(create.switchSession());
     }
-
 });
+
+
 
 store.dispatch(create.clear());
 
