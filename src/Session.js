@@ -43,17 +43,49 @@ class Session extends Component {
     }
   }
 
+  circleStyles() {
+    const radius = this.props.radius;
+    const dash = radius * 2 * Math.PI;
+    const degPassed = offsetInDeg.call(this);
+    const offset = - degToRadians(degPassed, radius);
+
+    return {
+      strokeDasharray: `${dash}px`,
+      strokeDashoffset: `${offset}px`,
+    };
+
+    function degToRadians(deg, r) {
+      return r * deg * 2 * Math.PI / 360;
+    }
+
+    function offsetInDeg() {
+      const {session, countDown, workTime, restTime} = this.props;
+      console.log(session, countDown, workTime, restTime);
+      let angle;
+      // find percentage of elapsed time and normalize it to degrees 
+      if (session === 'work') {
+        angle = (countDown / (workTime * 60)) * 360;
+      } else {
+        angle = (countDown / (restTime * 60)) * 360;
+      }
+      // find 'time' (angle) that already passed 
+      return 360 - angle;
+    }
+  }
+
   render() {
     return (
       <div className="Session">
         <svg className={this.getClassName()}
+          ref='circle'
           width="300"
           height="300"
-          viewBox="0 0 200 200"
+          viewBox={`0 0 ${this.props.radius * 2} ${this.props.radius * 2}`}
           xmlns="http://www.w3.org/2000/svg"
           onClick={this.handleClick.bind(this)}
+          style={this.circleStyles()}
         >
-          <circle cx="100" cy="100" r="100" />
+          <circle cx={this.props.radius} cy={this.props.radius} r={this.props.radius} />
         </svg>
         <div className="status">{this.statusMessage()}</div>
         <div className="timer">{this.secondsToString()}</div>
@@ -74,6 +106,9 @@ const mapStateToProps = state => ({
   session: state.session,
   countDown: state.countDown,
   isPausing: state.isPausing,
+  workTime: state.workTime,
+  restTime: state.restTime,
+  radius: 360,
 });
 
 const decrementSync = (dispatch) => {
