@@ -1,5 +1,5 @@
 let sounds = {};
-sounds.countdown = new Audio("assets/tic_tock_countdown.mp3");
+sounds.countdown = new Audio("Media/tic_tock_countdown.mp3");
 
 export let play = (sound, time) => {
     if (sounds[sound]) {

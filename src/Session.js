@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import reset from './assets/reset.svg';
+import reset from './Images/reset.svg';
 import { create } from './actions';
 
 import * as audio from './audio';

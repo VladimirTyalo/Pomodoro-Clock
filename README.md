@@ -1,6 +1,6 @@
 # Pomodoro clock application (React, Redux, Jest)
 
-## <a href="" target="_blank">Live Demo Preview</a>
+## <a href="https://vladimirtyalo.github.io/Pomodoro-Clock/" target="_blank">Live Demo Preview</a>
 
 ## About 
  This application based on pomodoro technique.
