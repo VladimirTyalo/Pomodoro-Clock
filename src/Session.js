@@ -137,7 +137,10 @@ const decrementSync = (dispatch) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  reset: () => Promise.resolve(dispatch(create.clear()))
+  reset: () => Promise.all([
+    dispatch(create.clear()),
+    dispatch(create.pause())
+    ])
     .then(() => dispatch(create.setTimerHandler(null))),
 
   play: () => Promise.all([
